@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6A Anglais – School is cool</title>
+<style>
+  :root{--bg:#fdf8ef;--ink:#1f2a44;--blue:#1d4ed8;--purple:#9333ea;--muted:#64748b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:"Comic Sans MS","Chalkboard SE","Segoe UI",Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4vh;padding:4vh 16px}
+  h1{font-size:clamp(28px,6vh,56px);color:var(--blue);text-align:center}
+  p.sub{font-size:clamp(16px,2.6vh,22px);color:var(--muted);text-align:center}
+  .menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;width:100%;max-width:900px}
+  a.card{display:block;background:#fff;border-radius:24px;padding:32px 24px;text-align:center;text-decoration:none;color:var(--ink);box-shadow:0 8px 0 rgba(0,0,0,.08);border:4px solid transparent}
+  a.card:hover{border-color:#fde68a}
+  .i{font-size:80px;line-height:1.1}
+  h2{font-size:28px;color:var(--blue);margin:10px 0 6px}
+  a.card:nth-child(2) h2{color:var(--purple)}
+  a.card p{font-size:17px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div>
+    <h1>🇬🇧 6A • School is cool!</h1>
+    <p class="sub">Chapter 1 • Part 1 & 2</p>
+  </div>
+  <div class="menu">
+    <a class="card" href="presentation.html"><div class="i">🎒</div><h2>There is / There are</h2><p>Les 2 séances à projeter (flèches du clavier, plein écran ⛶)</p></a>
+    <a class="card" href="quiz.html"><div class="i">🎮</div><h2>Quiz de révision</h2><p>Vocabulaire depuis la rentrée : écrit, prononciation, memory…</p></a>
+  </div>
+</body>
+</html>

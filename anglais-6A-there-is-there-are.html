@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6A – School is cool – There is / There are</title>
+<style>
+  :root{
+    --bg:#fdf8ef; --ink:#1f2a44; --blue:#1d4ed8; --red:#dc2626; --green:#15803d;
+    --yellow:#fde68a; --card:#ffffff; --muted:#64748b; --s1:#2563eb; --s2:#9333ea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);font-family:"Comic Sans MS","Chalkboard SE","Segoe UI",Arial,sans-serif;overflow:hidden}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:4vh 6vw 10vh;text-align:center;gap:2.5vh}
+  .slide.active{display:flex}
+  .tag{position:absolute;top:2vh;left:2vw;font-size:2.2vh;padding:.6vh 1.4vw;border-radius:99px;color:#fff;background:var(--s1)}
+  .tag.s2{background:var(--s2)}
+  .tag.fc{background:var(--green)}
+  .time{position:absolute;top:2vh;right:2vw;font-size:2.4vh;color:var(--muted)}
+  h1{font-size:8vh;line-height:1.1;color:var(--blue)}
+  h2{font-size:6vh;color:var(--blue)}
+  h3{font-size:4vh}
+  p,li{font-size:4vh;line-height:1.35}
+  .big{font-size:5.5vh}
+  .small{font-size:3vh;color:var(--muted)}
+  .box{background:var(--card);border-radius:3vh;padding:3vh 3vw;box-shadow:0 .8vh 0 rgba(0,0,0,.08);max-width:85vw}
+  .rule{display:flex;gap:3vw;flex-wrap:wrap;justify-content:center}
+  .rule .box{min-width:30vw}
+  .is{color:var(--green)} .are{color:var(--red)}
+  b.s{color:var(--red);text-decoration:underline}
+  .emoji{font-size:22vh;line-height:1}
+  .grid{display:grid;grid-template-columns:repeat(3,22vw);gap:2.5vh 2vw;justify-content:center}
+  .card{background:var(--card);border-radius:2.5vh;padding:2vh 1vw;box-shadow:0 .8vh 0 rgba(0,0,0,.08);min-height:24vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .card .e{font-size:11vh;line-height:1.1}
+  .card .w{font-size:3.4vh;font-weight:bold}
+  .card.gap{background:transparent;box-shadow:none;border:.6vh dashed #cbd5e1}
+  .card.gap .e,.card.gap .w{visibility:hidden}
+  .fcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 2vw;width:88vw}
+  .fcgrid .card{min-height:20vh}
+  .fcgrid .card .e{font-size:9vh}
+  button{font-family:inherit;font-size:3.2vh;padding:1.4vh 2.4vw;border:none;border-radius:99px;background:var(--blue);color:#fff;cursor:pointer;box-shadow:0 .6vh 0 rgba(0,0,0,.18)}
+  button:active{transform:translateY(.4vh);box-shadow:none}
+  button.alt{background:var(--green)} button.warn{background:var(--red)}
+  .btns{display:flex;gap:1.5vw;flex-wrap:wrap;justify-content:center}
+  .answer{visibility:hidden;color:var(--green);font-weight:bold}
+  .answer.show{visibility:visible}
+  ol.q{text-align:left;list-style:none;display:flex;flex-direction:column;gap:1.6vh}
+  ol.q li{cursor:pointer;background:var(--card);border-radius:2vh;padding:1.2vh 2vw;box-shadow:0 .5vh 0 rgba(0,0,0,.06)}
+  ol.q li .n{display:inline-block;width:5vh;height:5vh;line-height:5vh;text-align:center;border-radius:50%;background:var(--yellow);margin-right:1.2vw;font-size:3.2vh}
+  .blank{display:inline-block;min-width:9vw;border-bottom:.4vh solid var(--ink);text-align:center}
+  .blank .answer{color:var(--red)}
+  .prof{position:absolute;bottom:9vh;left:50%;transform:translateX(-50%);font-size:2.4vh;color:var(--muted);background:#fff7;padding:.8vh 1.5vw;border-radius:1vh;max-width:80vw}
+  .dark{position:fixed;inset:0;background:#0f172a;color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;gap:3vh;z-index:50}
+  .dark.show{display:flex}
+  .dark p{font-size:9vh}
+  .stop{font-size:20vh;color:var(--red);font-weight:bold}
+  nav{position:fixed;bottom:2vh;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:2vw;z-index:40}
+  nav button{font-size:2.4vh;padding:.8vh 1.6vw;background:#1f2a44cc}
+  #count{font-size:2.4vh;color:var(--muted);min-width:8vw;text-align:center}
+  ul.list{text-align:left;display:flex;flex-direction:column;gap:1.4vh}
+  .goal{background:var(--yellow);border-radius:2vh;padding:2vh 3vw;font-size:3.6vh;max-width:80vw}
+</style>
+</head>
+<body>
+
+<!-- ================= TITRE ================= -->
+<section class="slide">
+  <div class="emoji">🎒</div>
+  <h1>CHAPTER 1 – SCHOOL IS COOL!</h1>
+  <p class="big">Part 2 : At school – <span class="is">There is</span> / <span class="are">There are</span></p>
+  <p class="small">6e SEGPA • 2 séances de 55 min</p>
+</section>
+
+<!-- ================= FLASHCARDS ================= -->
+<section class="slide">
+  <span class="tag fc">Flashcards</span>
+  <h2>School things</h2>
+  <div class="fcgrid">
+    <div class="card"><div class="e">🎒</div><div class="w">a school bag</div></div>
+    <div class="card"><div class="e">✏️</div><div class="w">a pencil</div></div>
+    <div class="card"><div class="e">🖊️</div><div class="w">a pen</div></div>
+    <div class="card"><div class="e">📏</div><div class="w">a ruler</div></div>
+    <div class="card"><div class="e">📕</div><div class="w">a book</div></div>
+    <div class="card"><div class="e">📓</div><div class="w">a copybook</div></div>
+    <div class="card"><div class="e">✂️</div><div class="w">scissors</div></div>
+    <div class="card"><div class="e">🧽</div><div class="w">a rubber*</div></div>
+  </div>
+  <p class="small">* Pour la gomme, la colle, la trousse et le taille-crayon : montrer les vrais objets.</p>
+</section>
+
+<!-- ================= SÉANCE 1 ================= -->
+<section class="slide">
+  <span class="tag">Séance 1</span>
+  <h1>SÉANCE 1</h1>
+  <h3>Rappel + entraînement</h3>
+  <div class="goal">🎯 Je sais dire ce qu'il y a dans mon cartable avec « there is » et « there are ».</div>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 4 min</span>
+  <h2>Hello everybody! 👋</h2>
+  <div class="box">
+    <p>How are you today?</p>
+    <p class="big">😀 I'm great! &nbsp; 🙂 I'm fine. &nbsp; 😐 I'm OK. &nbsp; 😴 I'm tired. &nbsp; 😢 I'm sad.</p>
+  </div>
+  <p>What's the date today? 📅</p>
+</section>
+
+<section class="slide" id="flash">
+  <span class="tag">Séance 1</span><span class="time">⏱ 3 min</span>
+  <h2>Flash! ⚡</h2>
+  <div class="card" style="min-width:40vw;min-height:45vh">
+    <div class="e" id="flashE" style="font-size:24vh">🎒</div>
+    <div class="w answer" id="flashW" style="font-size:6vh">a school bag</div>
+  </div>
+  <div class="btns">
+    <button class="alt" onclick="flashShow()">Réponse</button>
+    <button onclick="flashNext()">Carte suivante ▶</button>
+  </div>
+</section>
+
+<section class="slide" id="wm">
+  <span class="tag">Séance 1</span><span class="time">⏱ 5 min</span>
+  <h2>What's missing? 🤔</h2>
+  <div class="grid" id="wmGrid"></div>
+  <div class="btns">
+    <button class="warn" onclick="wmHide(1)">🙈 Close your eyes! (1 carte)</button>
+    <button class="warn" onclick="wmHide(2)">🙈 Close your eyes! (2 cartes)</button>
+    <button class="alt" onclick="wmAnswer()">Réponse</button>
+    <button onclick="wmReset()">↺ Nouvelles cartes</button>
+  </div>
+  <p class="answer big" id="wmAns"></p>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 5 min</span>
+  <h2>La règle 📌</h2>
+  <div class="rule">
+    <div class="box">
+      <h3 class="is">THERE IS</h3>
+      <p>+ <b>1</b> chose</p>
+      <p class="big">There is <b>a</b> pen. 🖊️</p>
+    </div>
+    <div class="box">
+      <h3 class="are">THERE ARE</h3>
+      <p>+ <b>plusieurs</b> choses → <b class="s">s</b></p>
+      <p class="big">There are <b>two</b> pen<b class="s">s</b>. 🖊️🖊️</p>
+    </div>
+  </div>
+  <p class="small">⚠️ scissors = toujours <span class="are">there are</span> !</p>
+</section>
+
+<section class="slide" id="isare">
+  <span class="tag">Séance 1</span><span class="time">⏱ 5 min</span>
+  <h2>Is or Are? ☝️ / 🙌</h2>
+  <p>☝️ 1 doigt = <span class="is">there is</span> &nbsp;&nbsp; 🙌 2 mains = <span class="are">there are</span></p>
+  <div class="card" style="min-width:60vw;min-height:32vh"><div class="e" id="iaE" style="font-size:16vh"></div></div>
+  <p class="answer big" id="iaAns"></p>
+  <div class="btns">
+    <button class="alt" onclick="iaShow()">Réponse</button>
+    <button onclick="iaNext()">Suivant ▶</button>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 8 min</span>
+  <h2>Mystery bag 🎒❓</h2>
+  <div class="box">
+    <p class="big">What's in my school bag?</p>
+    <p>Mets ta main dans le sac… sans regarder ! 🙈</p>
+    <p class="big"><span class="is">There is a</span> … ! &nbsp; / &nbsp; <span class="are">There are two</span> …s !</p>
+  </div>
+  <div class="prof">Prof : un élève touche un objet dans le vrai cartable et fait sa phrase, la classe valide.</div>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 5 min</span>
+  <h2>ARDOISES ! ✍️ Write IS or ARE</h2>
+  <ol class="q">
+    <li onclick="rev(this)"><span class="n">1</span>There <span class="blank"><span class="answer">is</span></span> a ruler. 📏</li>
+    <li onclick="rev(this)"><span class="n">2</span>There <span class="blank"><span class="answer">are</span></span> four pens. 🖊️🖊️🖊️🖊️</li>
+    <li onclick="rev(this)"><span class="n">3</span>There <span class="blank"><span class="answer">is</span></span> a pencil case.</li>
+    <li onclick="rev(this)"><span class="n">4</span>There <span class="blank"><span class="answer">are</span></span> scissors. ✂️</li>
+    <li onclick="rev(this)"><span class="n">5</span>There <span class="blank"><span class="answer">are</span></span> three books. 📕📕📕</li>
+  </ol>
+  <div class="prof">« Slates up! » puis clic sur la phrase pour la réponse.</div>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 3 min</span>
+  <h2>ARDOISES ! 🎨 Listen and draw</h2>
+  <ol class="q">
+    <li onclick="rev(this)"><span class="n">1</span>There is a big school bag. <span class="answer">🎒</span></li>
+    <li onclick="rev(this)"><span class="n">2</span>There are three pencils. <span class="answer">✏️✏️✏️</span></li>
+    <li onclick="rev(this)"><span class="n">3</span>There are two rulers. <span class="answer">📏📏</span></li>
+  </ol>
+  <div class="prof">Prof : lire sans montrer, les élèves dessinent, puis « Slates up! ».</div>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 14 min</span>
+  <h2>Trace écrite 📒</h2>
+  <div class="box" style="text-align:left">
+    <p>In my school bag, <span class="is"><b>there is</b></span> a pencil case.</p>
+    <p>In my pencil case, <span class="are"><b>there are</b></span> pens and pencils.</p>
+    <p>&nbsp;</p>
+    <p><span class="is">There is</span> → 1 chose. &nbsp; <span class="are">There are</span> → plusieurs choses.</p>
+  </div>
+  <p class="small">Puis fiche « 6A exercice there is / are » (corrigée à l'oral).</p>
+</section>
+
+<section class="slide">
+  <span class="tag">Séance 1</span><span class="time">⏱ 3 min</span>
+  <h2>Goodbye everybody! 👋</h2>
+  <div class="box">
+    <p>📝 Homework : fiche « match + reorder »</p>
+    <p>📖 Révise ta leçon !</p>
+  </div>
+  <p class="big are">Next time: TEST! 💪</p>
+</section>
+
+<!-- ================= SÉANCE 2 ================= -->
+<section class="slide">
+  <span class="tag s2">Séance 2</span>
+  <h1 style="color:var(--s2)">SÉANCE 2</h1>
+  <h3>Révision express + évaluation</h3>
+  <div class="goal">🎯 Je montre ce que je sais faire.</div>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 5 min</span>
+  <h2>Hello everybody! 👋</h2>
+  <div class="box">
+    <p>How are you today? What's the date today?</p>
+    <p>Correction des devoirs : 👍 ou 👎 ?</p>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 5 min</span>
+  <h2>Hot potato! 🥔🔥</h2>
+  <p>Passe la trousse… Quand c'est <b class="are">STOP!</b>, dis une phrase :</p>
+  <p class="big">In my pencil case, <span class="is">there is</span> … / <span class="are">there are</span> …</p>
+  <div class="btns"><button class="warn" onclick="hotStart()">▶ Go!</button></div>
+  <p class="small" id="hotInfo">Le STOP arrive au hasard entre 5 et 15 secondes.</p>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 5 min</span>
+  <h2>Quiz ardoise ⚡</h2>
+  <ol class="q">
+    <li onclick="rev(this)"><span class="n">1</span>Comment dit-on « une gomme » ? <span class="answer">a rubber</span></li>
+    <li onclick="rev(this)"><span class="n">2</span>There ___ two books. <span class="answer">are</span></li>
+    <li onclick="rev(this)"><span class="n">3</span>Comment dit-on « une règle » ? <span class="answer">a ruler</span></li>
+    <li onclick="rev(this)"><span class="n">4</span>There ___ a pencil case. <span class="answer">is</span></li>
+    <li onclick="rev(this)"><span class="n">5</span>Qui fait traverser les enfants en Angleterre ? <span class="answer">the lollipop lady</span></li>
+  </ol>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 2 min</span>
+  <h2>Ce que je dois savoir faire ✅</h2>
+  <ul class="list box">
+    <li>🎒 Dire ce qu'il y a dans mon cartable</li>
+    <li>☝️🙌 Utiliser « there is » et « there are »</li>
+    <li>🧩 Remettre les mots dans l'ordre</li>
+    <li>🇬🇧 Connaître l'école en Angleterre</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 33 min</span>
+  <h1>TEST 📝</h1>
+  <div class="box">
+    <p>Partie I : School things + there is / there are</p>
+    <p>Partie II : School in England</p>
+  </div>
+  <p class="big">Good luck! 🍀</p>
+  <div class="prof">Prof : lire chaque consigne à voix haute, faire l'écoute ensemble.</div>
+</section>
+
+<section class="slide">
+  <span class="tag s2">Séance 2</span><span class="time">⏱ 5 min</span>
+  <h2>Finished? 🎨</h2>
+  <div class="box">
+    <p>Dessine <b>My dream school bag</b></p>
+    <p>et écris 3 phrases : <span class="is">There is</span> … / <span class="are">There are</span> …</p>
+  </div>
+  <p class="big">Goodbye everybody! Next: Look at these monsters! 🎃👻</p>
+</section>
+
+<!-- Écran noir -->
+<div class="dark" id="dark" onclick="this.classList.remove('show')">
+  <p id="darkTxt">🙈 Close your eyes!</p>
+  <p style="font-size:4vh">(clic pour « Open your eyes! »)</p>
+</div>
+
+<nav>
+  <button onclick="go(-1)">◀</button>
+  <span id="count"></span>
+  <button onclick="go(1)">▶</button>
+  <button onclick="fs()">⛶</button>
+</nav>
+
+<script>
+const ITEMS=[
+  {e:"🎒",s:"a school bag",p:"school bags"},
+  {e:"✏️",s:"a pencil",p:"pencils"},
+  {e:"🖊️",s:"a pen",p:"pens"},
+  {e:"📏",s:"a ruler",p:"rulers"},
+  {e:"📕",s:"a book",p:"books"},
+  {e:"📓",s:"a copybook",p:"copybooks"},
+  {e:"✂️",s:"scissors",p:"scissors",always:true}
+];
+const NUM=["","one","two","three","four"];
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+  document.getElementById('count').textContent=(cur+1)+" / "+slides.length;
+}
+function go(d){show(cur+d)}
+function fs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  if(e.key==='Escape')document.getElementById('dark').classList.remove('show');
+});
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function rev(li){li.querySelectorAll('.answer').forEach(a=>a.classList.toggle('show'))}
+
+/* Flash */
+let fl=shuffle(ITEMS),fi=0;
+function flashNext(){fi=(fi+1)%fl.length;if(fi===0)fl=shuffle(ITEMS);
+  document.getElementById('flashE').textContent=fl[fi].e;
+  const w=document.getElementById('flashW');w.textContent=fl[fi].s;w.classList.remove('show')}
+function flashShow(){document.getElementById('flashW').classList.add('show')}
+
+/* What's missing */
+let wmCards=[],wmGone=[];
+function wmReset(){
+  wmCards=shuffle(ITEMS).slice(0,6);wmGone=[];wmDraw();
+  document.getElementById('wmAns').classList.remove('show');
+}
+function wmDraw(){
+  document.getElementById('wmGrid').innerHTML=wmCards.map((c,i)=>
+    `<div class="card ${wmGone.includes(i)?'gap':''}"><div class="e">${c.e}</div><div class="w">${c.s}</div></div>`).join('');
+}
+function wmHide(n){
+  wmGone=shuffle([0,1,2,3,4,5]).slice(0,n);
+  // on mélange aussi l'ordre des cartes restantes pour corser
+  const d=document.getElementById('dark');
+  document.getElementById('darkTxt').textContent="🙈 Close your eyes!";
+  d.classList.add('show');
+  wmDraw();
+  const names=wmGone.map(i=>"the "+wmCards[i].s.replace(/^a /,"")).join(" and the ");
+  const verb=wmGone.length>1||wmCards[wmGone[0]].always?"are":"is";
+  const a=document.getElementById('wmAns');a.textContent=names.charAt(0).toUpperCase()+names.slice(1)+" "+verb+" missing!";a.classList.remove('show');
+  d.onclick=()=>{d.classList.remove('show')};
+}
+function wmAnswer(){document.getElementById('wmAns').classList.add('show')}
+
+/* Is or Are */
+function iaNext(){
+  const it=ITEMS[Math.floor(Math.random()*ITEMS.length)];
+  let n=it.always?1:(Math.random()<.45?1:2+Math.floor(Math.random()*3));
+  document.getElementById('iaE').textContent=it.e.repeat(it.always?1:n);
+  const a=document.getElementById('iaAns');
+  if(it.always)a.innerHTML='<span class="are">There are scissors.</span>';
+  else if(n===1)a.innerHTML='<span class="is">There is '+it.s+'.</span>';
+  else a.innerHTML='<span class="are">There are '+NUM[n]+' '+it.p+'.</span>';
+  a.classList.remove('show');
+}
+function iaShow(){document.getElementById('iaAns').classList.add('show')}
+
+/* Hot potato */
+let hotT=null;
+function hotStart(){
+  clearTimeout(hotT);
+  const info=document.getElementById('hotInfo');info.textContent="🎵 La trousse tourne…";
+  hotT=setTimeout(()=>{
+    const d=document.getElementById('dark');
+    document.getElementById('darkTxt').innerHTML='<span class="stop">STOP!</span>';
+    d.classList.add('show');
+    d.onclick=()=>{d.classList.remove('show');info.textContent="Le STOP arrive au hasard entre 5 et 15 secondes."};
+  },5000+Math.random()*10000);
+}
+
+wmReset();iaNext();show(0);
+</script>
+</body>
+</html>
